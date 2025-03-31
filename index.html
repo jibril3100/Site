@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Aéronautique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        #particles-header {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        section {
+            padding: 4rem 1rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        #about {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 280px;
+            max-width: 100%;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .about-img img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            object-fit: cover;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 280px;
+            padding: 1rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .skill {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid var(--accent);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        #projects {
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-color: var(--accent);
+        }
+
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 1.2rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        #contact {
+            background: transparent;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            font-size: 1.8rem;
+            color: var(--light);
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s;
+        }
+
+        .animate.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-img, .about-text {
+                min-width: 100%;
+                padding: 0.5rem;
+            }
+            
+            .skills {
+                justify-content: center;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .skill {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .contact-link {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-header"></div>
+
+    <header>
+        <div class="header-content">
+            <h1>Jibril Jaff</h1>
+            <p class="tagline">Mon Portfolio</p>
+            <a href="#projects" class="btn">Voir mes projets</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title animate">À Propos</h2>
+            <div class="about-content">
+                <div class="about-img animate">
+                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Profil">
+                </div>
+                <div class="about-text animate" style="transition-delay: 0.2s;">
+                    <p>
+                        Passionné par l'aéronautique depuis toujours, je me destine à une carrière d'ingénieur en systèmes aérospatiaux. Mon BIA et mes projets techniques démontrent mon engagement.
+                    </p>
+                    <p>
+                        Le BUT GIM est pour moi l'opportunité idéale d'allier théorie et pratique dans le domaine de la maintenance industrielle appliquée à l'aéronautique.
+                    </p>
+                    <div class="skills">
+                        <span class="skill">Aéronautique</span>
+                        <span class="skill">Maintenance</span>
+                        <span class="skill">SolidWorks</span>
+                        <span class="skill">Arduino</span>
+                        <span class="skill">BIA</span>
+                        <span class="skill">Électronique</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title animate">Mes Projets</h2>
+            <div class="projects-grid">
+                <div class="project-card animate" style="transition-delay: 0.1s;">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Drone">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Drone Autonome</h3>
+                        <p class="project-desc">
+                            Conception d'un drone avec télémétrie et contrôle Arduino.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech">Arduino</span>
+                            <span class="tech">3D Printing</span>
+                            <span class="tech">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate" style="transition-delay: 0.2s;">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="BIA">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Brevet BIA</h3>
+                        <p class="project-desc">
+                            Obtention du BIA avec mention (mécanique, météo, navigation).
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech">Aérodynamique</span>
+                            <span class="tech">Météorologie</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate" style="transition-delay: 0.3s;">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Simulateur">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Immersion GIM</h3>
+                        <p class="project-desc">
+                            Découverte des simulateurs de vol et bancs de maintenance.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech">Maintenance</span>
+                            <span class="tech">Simulation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title animate">Contact</h2>
+                <p class="animate" style="text-align: center;">Intéressé par mon profil ? Contactez-moi !</p>
+                <div class="contact-links">
+                    <a href="mailto:email@exemple.com" class="contact-link animate" style="transition-delay: 0.1s;">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="contact-link animate" style="transition-delay: 0.2s;">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="contact-link animate" style="transition-delay: 0.3s;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-header", {
+            "particles": {
+                "number": {
+                    "value": 60,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#3b82f6"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.7,
+                    "random": true
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 120,
+                    "color": "#3b82f6",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1.5,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "bounce",
+                    "bounce": true,
+                    "attract": {
+                        "enable": false
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse",
+                        "parallax": {
+                            "enable": false
+                        }
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push",
+                        "particles_nb": 3
+                    }
+                },
+                "modes": {
+                    "repulse": {
+                        "distance": 80,
+                        "duration": 0.4,
+                        "speed": 0.5
+                    },
+                    "push": {
+                        "particles_nb": 3
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Animation au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Système amélioré de particules
+        let lastInteraction = 0;
+        const interactionCooldown = 300;
+        
+        document.addEventListener("mousemove", function(e) {
+            const now = Date.now();
+            if (now - lastInteraction < interactionCooldown) return;
+            lastInteraction = now;
+            
+            if (!window.pJSDom || window.pJSDom.length === 0) return;
+            
+            const particles = window.pJSDom[0].pJS.particles;
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            for (let i = 0; i < particles.array.length; i++) {
+                const particle = particles.array[i];
+                const dx = mouseX - particle.x;
+                const dy = mouseY - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    const force = Math.min(1, (100 - distance) / 100);
+                    particle.vx = -dx / distance * force * 0.8;
+                    particle.vy = -dy / distance * force * 0.8;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
