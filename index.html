@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Aéronautique</title>
+    <title>Mon Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
     <style>
@@ -67,7 +67,9 @@
 
         .tagline {
             font-size: clamp(1rem, 3vw, 1.5rem);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.26);
+            margin-top: -25px;
         }
 
         .btn {
@@ -122,29 +124,54 @@
         }
 
         .about-content {
+            padding-top: 40px;
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             align-items: center;
             justify-content: center;
         }
-
+        .img-container {
+    display: inline-block;
+    filter: drop-shadow(10px 10px 25px rgba(59, 130, 246, 0.7));
+}
         .about-img {
-            flex: 1;
-            min-width: 280px;
-            max-width: 100%;
-            text-align: center;
-            padding: 1rem;
-        }
+    flex: 1;
+    min-width: 220px;
+    max-width: 100%;
+    text-align: center;
+    padding: 2rem; /* Augmenté pour l'ombre */
+    position: relative;
+    z-index: 1;
+    overflow: visible; /* Crucial */
+}
 
-        .about-img img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            object-fit: cover;
-        }
+.about-img img {
+    width: 80%;
+    max-width: 220px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    
+    /* Forme polygonale + bords lisses */
+    clip-path: polygon(
+        50% 0%, 80% 10%, 100% 35%, 90% 70%,
+        60% 90%, 30% 85%, 10% 60%, 0% 30%, 20% 10%
+    );
+    border-radius: 15px;
+    
+    /* Solution ombre garantie */
+    box-shadow: none; /* On désactive box-shadow */
+    filter: drop-shadow(10px 10px 25px rgba(59, 130, 246, 0.7));
+    
+    /* Fond obligatoire */
+    background: white;
+    border: 2px solid rgba(59, 130, 246, 0.2); /* Optionnel */
+    box-shadow: none;
+    filter: none;
+    
+}
 
         .about-text {
             flex: 1;
@@ -197,6 +224,30 @@
         .project-img {
             height: 200px;
             overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .project-img::after {
+            content: 'Plus de détails';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .project-img:hover::after {
+            opacity: 1;
         }
 
         .project-img img {
@@ -268,6 +319,168 @@
             transform: translateY(-3px);
         }
 
+        /* Styles améliorés pour la galerie */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .gallery-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .gallery-content {
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-main-container {
+            display: flex;
+            flex: 1;
+            gap: 20px;
+            margin-bottom: 10px;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .gallery-main-img {
+            flex: 1;
+            min-width: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .gallery-main-img img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            transition: opacity 0.3s;
+        }
+
+        .gallery-description-container {
+            flex: 1;
+            min-width: 0;
+            background: rgba(30, 41, 59, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .gallery-description {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+
+        .image-description {
+            font-style: italic;
+            margin-top: 10px;
+            color: var(--accent);
+            padding: 5px 0;
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .gallery-nav-arrows {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .gallery-arrow {
+            pointer-events: all;
+            background: rgba(30, 41, 59, 0.7);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 20px;
+            transition: all 0.3s;
+        }
+
+        .gallery-arrow:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .gallery-thumbnails {
+            height: 100px;
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            justify-content: center;
+            overflow-x: hidden;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .gallery-thumbnail {
+            width: 100px;
+            height: 75px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s;
+            object-fit: cover;
+        }
+
+        .gallery-thumbnail:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .gallery-thumbnail.active {
+            border-color: var(--accent);
+        }
+
+        .gallery-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .gallery-close:hover {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -312,6 +525,49 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .project-img::after {
+                font-size: 0.8rem;
+            }
+
+            .gallery-content {
+                height: 85vh;
+            }
+
+            .gallery-main-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .gallery-main-img img {
+                max-height: 50vh;
+            }
+
+            .gallery-description-container {
+                max-height: none;
+                width: 100%;
+            }
+            
+            .gallery-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                margin: 0 10px;
+            }
+            
+            .gallery-thumbnails {
+                height: auto;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 15px;
+            }
+            
+            .gallery-thumbnail {
+                width: 80px;
+                height: 60px;
+                flex-shrink: 0;
+            }
         }
 
         @media (max-width: 480px) {
@@ -340,16 +596,41 @@
             .contact-link {
                 font-size: 1.5rem;
             }
+
+            .gallery-content {
+                height: 80vh;
+                padding: 10px;
+            }
+            
+            .gallery-main-img img {
+                max-height: 40vh;
+            }
+            
+            .gallery-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+            
+            .gallery-thumbnail {
+                width: 60px;
+                height: 45px;
+            }
+            
+            .gallery-description {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
+    
     <div id="particles-header"></div>
 
     <header>
         <div class="header-content">
-            <h1>Jibril Jaff</h1>
-            <p class="tagline">Mon Portfolio</p>
+            <h1>Mon Portfolio - Candidat</h1>
+            <p class="tagline">Parcoursup</p>
             <a href="#projects" class="btn">Voir mes projets</a>
         </div>
     </header>
@@ -358,8 +639,8 @@
         <div class="container">
             <h2 class="section-title animate">À Propos</h2>
             <div class="about-content">
-                <div class="about-img animate">
-                    <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Profil">
+                <div class="about-img animate" class="img-container">
+                    <img src="ad7a4a6b-c7ab-4a68-8739-667f07c22c51.png" alt="Profil">
                 </div>
                 <div class="about-text animate" style="transition-delay: 0.2s;">
                     <p>
@@ -386,11 +667,28 @@
             <h2 class="section-title animate">Mes Projets</h2>
             <div class="projects-grid">
                 <div class="project-card animate" style="transition-delay: 0.1s;">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Drone">
+                    <div class="project-img" data-gallery="velo-solaire">
+                        <img src="76e65401-4a9f-423a-b733-5bee3830d1f2.png" alt="Vélo Solaire">
                     </div>
                     <div class="project-info">
-                        <h3 class="project-title">Drone Autonome</h3>
+                        <h3 class="project-title">Vélo Solaire</h3>
+                        <p class="project-desc">
+                            Conversion d'un vélo classique en vélo électrique solaire avec autonomie prolongée.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech">Énergie solaire</span>
+                            <span class="tech">Électronique</span>
+                            <span class="tech">Développement durable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate" style="transition-delay: 0.2s;">
+                    <div class="project-img" data-gallery="drone">
+                        <img src="IUT-GIM-genie-industriel-maintenance-travaux-pratique-05.jpg" alt="Drone">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Immersion en GIM</h3>
                         <p class="project-desc">
                             Conception d'un drone avec télémétrie et contrôle Arduino.
                         </p>
@@ -402,34 +700,22 @@
                     </div>
                 </div>
 
-                <div class="project-card animate" style="transition-delay: 0.2s;">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="BIA">
+                <div class="project-card animate" style="transition-delay: 0.3s;">
+                    <div class="project-img" data-gallery="bia">
+                        <img src="fdecddf9-cb4b-456d-a166-5073673ac8aa.png" alt="BIA">
                     </div>
                     <div class="project-info">
-                        <h3 class="project-title">Brevet BIA</h3>
+                        <h3 class="project-title">Brevet Initiation Aéronautique</h3>
                         <p class="project-desc">
-                            Obtention du BIA avec mention (mécanique, météo, navigation).
+                            Obtention du BIA en 2022 avec option anglais aéronautique.
                         </p>
                         <div class="project-tech">
                             <span class="tech">Aérodynamique</span>
                             <span class="tech">Météorologie</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card animate" style="transition-delay: 0.3s;">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Simulateur">
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Immersion GIM</h3>
-                        <p class="project-desc">
-                            Découverte des simulateurs de vol et bancs de maintenance.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech">Maintenance</span>
-                            <span class="tech">Simulation</span>
+                            <span class="tech">Étude des aéronefs</span>
+                            <span class="tech">Histoire</span>
+                            <span class="tech">Anglais aéronautique</span>
+                            <span class="tech">Règlementation</span>             
                         </div>
                     </div>
                 </div>
@@ -462,7 +748,7 @@
         particlesJS("particles-header", {
             "particles": {
                 "number": {
-                    "value": 60,
+                    "value": 80,
                     "density": {
                         "enable": true,
                         "value_area": 800
@@ -475,7 +761,7 @@
                     "type": "circle"
                 },
                 "opacity": {
-                    "value": 0.7,
+                    "value": 0.8,
                     "random": true
                 },
                 "size": {
@@ -557,7 +843,7 @@
 
         // Système amélioré de particules
         let lastInteraction = 0;
-        const interactionCooldown = 300;
+        const interactionCooldown = 100;
         
         document.addEventListener("mousemove", function(e) {
             const now = Date.now();
@@ -583,6 +869,198 @@
                 }
             }
         });
+
+        // Galeries des projets
+        const galleries = {
+            'velo-solaire': {
+                title: "Vélo Solaire Autonome",
+                description: "Projet complet de conversion d'un vélo standard en vélo électrique solaire autonome. Le système comprend :<br>- 2 panneaux solaires de 100W intégrés<br>- Batterie Li-ion 36V 10Ah<br>- Contrôleur de charge MPPT<br>- Autonomie de 50km (100km avec assistance solaire)<br>- Charge complète en 4h par soleil optimal",
+                images: [
+                    {
+                        url: 'https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Vue complète du vélo avec les panneaux solaires intégrés au cadre'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1602810318383-1a7702786bdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Détail du système de batterie et contrôleur de charge'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Moteur roue arrière de 250W avec capteur de pédalage'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Schéma électronique du système de gestion de puissance'
+                    }
+                ]
+            },
+            'drone': {
+                title: "Drone Autonome",
+                description: "Conception et réalisation d'un drone autonome avec les caractéristiques suivantes :<br>- Télémétrie via module radio<br>- Contrôle Arduino<br>- Caméra HD 1080p<br>- Autonomie de 25 minutes<br>- Portée de 1km",
+                images: [
+                    {
+                        url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Vue globale du drone assemblé'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Carte électronique de contrôle avec Arduino'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a7f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Test en vol du drone'
+                    }
+                ]
+            },
+            'bia': {
+                title: "Brevet Initiation Aéronautique",
+                description: "Obtention du BIA (Brevet d'Initiation Aéronautique) en 2022 avec les options :<br>- Anglais aéronautique<br>- Météorologie approfondie<br>- Histoire de l'aviation<br><br>Formation comprenant 40 heures de cours théoriques et 1 heure de vol d'initiation.",
+                images: [
+                    {
+                        url: 'CamScanner 01-04-2025 16.42-1.png',
+                        description: 'Diplôme du Brevet d\'Initiation Aéronautique'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Session de formation théorique'
+                    },
+                    {
+                        url: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
+                        description: 'Vol d\'initiation en tant que copilote'
+                    }
+                ]
+            }
+        };
+
+        // Gestion des galeries
+        document.querySelectorAll('[data-gallery]').forEach(container => {
+            container.addEventListener('click', function() {
+                const galleryId = this.getAttribute('data-gallery');
+                openGallery(galleryId);
+            });
+        });
+
+        function openGallery(galleryId) {
+            const galleryData = galleries[galleryId];
+            if (!galleryData) return;
+            
+            // Création de la modal
+            const modal = document.createElement('div');
+            modal.className = 'gallery-modal';
+            
+            // Construction du contenu de la galerie
+            let thumbnailsHTML = '';
+            galleryData.images.forEach((img, index) => {
+                thumbnailsHTML += `
+                    <img class="gallery-thumbnail ${index === 0 ? 'active' : ''}" 
+                         src="${img.url}" 
+                         data-index="${index}"
+                         alt="Miniature ${index + 1}">
+                `;
+            });
+            
+            modal.innerHTML = `
+                <span class="gallery-close">&times;</span>
+                <div class="gallery-content">
+                    <div class="gallery-main-container">
+                        <div class="gallery-main-img">
+                            <div class="gallery-nav-arrows">
+                                <button class="gallery-arrow prev-btn">&lt;</button>
+                                <button class="gallery-arrow next-btn">&gt;</button>
+                            </div>
+                            <img src="${galleryData.images[0].url}" alt="${galleryData.images[0].description}">
+                        </div>
+                        <div class="gallery-description-container">
+                            <div class="gallery-description">
+                                <h3>${galleryData.title}</h3>
+                                <p>${galleryData.description}</p>
+                                <p class="image-description">${galleryData.images[0].description}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-thumbnails">${thumbnailsHTML}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => modal.classList.add('active'), 10);
+            
+            // Gestion des événements
+            let currentIndex = 0;
+            
+            // Navigation par thumbnails
+            modal.querySelectorAll('.gallery-thumbnail').forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    updateGallery(modal, galleryData, index);
+                    currentIndex = index;
+                });
+            });
+            
+            // Boutons flèches
+            modal.querySelector('.prev-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const newIndex = (currentIndex - 1 + galleryData.images.length) % galleryData.images.length;
+                updateGallery(modal, galleryData, newIndex);
+                currentIndex = newIndex;
+            });
+            
+            modal.querySelector('.next-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const newIndex = (currentIndex + 1) % galleryData.images.length;
+                updateGallery(modal, galleryData, newIndex);
+                currentIndex = newIndex;
+            });
+            
+            // Fermeture
+            modal.querySelector('.gallery-close').addEventListener('click', closeGallery);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeGallery();
+            });
+            
+            document.addEventListener('keydown', function handleKey(e) {
+                if (e.key === 'Escape') closeGallery();
+                if (e.key === 'ArrowLeft') {
+                    const newIndex = (currentIndex - 1 + galleryData.images.length) % galleryData.images.length;
+                    updateGallery(modal, galleryData, newIndex);
+                    currentIndex = newIndex;
+                }
+                if (e.key === 'ArrowRight') {
+                    const newIndex = (currentIndex + 1) % galleryData.images.length;
+                    updateGallery(modal, galleryData, newIndex);
+                    currentIndex = newIndex;
+                }
+            });
+            
+            function closeGallery() {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modal.remove();
+                    document.body.style.overflow = '';
+                    document.removeEventListener('keydown', handleKey);
+                }, 300);
+            }
+        }
+
+        function updateGallery(modal, galleryData, index) {
+            // Mettre à jour l'image principale
+            const mainImg = modal.querySelector('.gallery-main-img img');
+            mainImg.src = galleryData.images[index].url;
+            mainImg.alt = galleryData.images[index].description;
+            
+            // Mettre à jour la description
+            modal.querySelector('.image-description').textContent = galleryData.images[index].description;
+            
+            // Mettre à jour les thumbnails actives
+            modal.querySelectorAll('.gallery-thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+                if (parseInt(thumb.getAttribute('data-index')) === index) {
+                    thumb.classList.add('active');
+                }
+            });
+        }
     </script>
 </body>
 </html>
