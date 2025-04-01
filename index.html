@@ -318,6 +318,71 @@
             color: var(--accent);
             transform: translateY(-3px);
         }
+        .parcoursup-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        background: none;
+        border: none;
+        text-decoration: none;
+    }
+
+    .logo-wrapper {
+        width: 36px;
+        height: 36px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .parcoursup-logo {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    .parcoursup-btn:hover .logo-wrapper {
+
+        transform: rotate(45deg);
+    }
+    
+
+    /* Cache le texte s'il existe */
+    .btn-text {
+        display: none !important;
+    }
+
+
+
+/* Styles existants améliorés */
+.dossier-box {
+    background: rgba(59, 130, 246, 0.15);
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 1rem auto;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.contact-notice {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
 
         /* Styles améliorés pour la galerie */
         .gallery-modal {
@@ -643,19 +708,17 @@
                     <img src="ad7a4a6b-c7ab-4a68-8739-667f07c22c51.png" alt="Profil">
                 </div>
                 <div class="about-text animate" style="transition-delay: 0.2s;">
-                    <p>
-                        Passionné par l'aéronautique depuis toujours, je me destine à une carrière d'ingénieur en systèmes aérospatiaux. Mon BIA et mes projets techniques démontrent mon engagement.
+                    <p style="padding-bottom: 20px;"> 
+                        Passionné par l'aéronautique depuis toujours, je me destine à une carrière d'ingénieur en aéronautique. Mon Brevet d'Initiation Aéronautique (BIA) et mes projets témoignent de ma démarche afin de concrétiser cette ambition.
                     </p>
-                    <p>
-                        Le BUT GIM est pour moi l'opportunité idéale d'allier théorie et pratique dans le domaine de la maintenance industrielle appliquée à l'aéronautique.
-                    </p>
+                   
                     <div class="skills">
                         <span class="skill">Aéronautique</span>
                         <span class="skill">Maintenance</span>
-                        <span class="skill">SolidWorks</span>
-                        <span class="skill">Arduino</span>
+                        <span class="skill">Mécanique</span>
+                        <span class="skill">Électrotechnique</span>
                         <span class="skill">BIA</span>
-                        <span class="skill">Électronique</span>
+                        <span class="skill">Informatique (Developpement Web)</span>
                     </div>
                 </div>
             </div>
@@ -664,16 +727,16 @@
 
     <section id="projects">
         <div class="container">
-            <h2 class="section-title animate">Mes Expériencex</h2>
+            <h2 class="section-title animate">Mes Expériences</h2>
             <div class="projects-grid">
                 <div class="project-card animate" style="transition-delay: 0.1s;">
                     <div class="project-img" data-gallery="velo-solaire">
-                        <img src="76e65401-4a9f-423a-b733-5bee3830d1f2.png" alt="Vélo Solaire">
+                        <img src="IMG_6642.JPG" alt="Vélo Solaire">
                     </div>
                     <div class="project-info">
                         <h3 class="project-title">Vélo Solaire</h3>
                         <p class="project-desc">
-                            Conversion d'un vélo classique en vélo électrique solaire avec autonomie prolongée.
+                            Construction d'un vélo solaire.
                         </p>
                         <div class="project-tech">
                             <span class="tech">Énergie solaire</span>
@@ -684,25 +747,27 @@
                 </div>
 
                 <div class="project-card animate" style="transition-delay: 0.2s;">
-                    <div class="project-img" data-gallery="drone">
+                    <div class="project-img" data-gallery="">
                         <img src="IUT-GIM-genie-industriel-maintenance-travaux-pratique-05.jpg" alt="Drone">
                     </div>
                     <div class="project-info">
                         <h3 class="project-title">Immersion en GIM</h3>
                         <p class="project-desc">
-                            Conception d'un drone avec télémétrie et contrôle Arduino.
+                            Le 17 février 2025, j'ai participé à une journée d'immersion au département Génie Industriel et Maintenance de l'IUT de Blagnac, accompagné par Alexis Dubray, étudiant en première année.
                         </p>
                         <div class="project-tech">
-                            <span class="tech">Arduino</span>
-                            <span class="tech">3D Printing</span>
-                            <span class="tech">Python</span>
+                            <span class="tech">Industriel</span>
+                            <span class="tech">Maintenance</span>
+                            <span class="tech">GIM</span>
+                            <span class="tech">Journée d'immersion</span>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="project-card animate" style="transition-delay: 0.3s;">
                     <div class="project-img" data-gallery="bia">
-                        <img src="fdecddf9-cb4b-456d-a166-5073673ac8aa.png" alt="BIA">
+                        <img src="dr400.jpg" alt="BIA">
                     </div>
                     <div class="project-info">
                         <h3 class="project-title">Brevet Initiation Aéronautique</h3>
@@ -726,17 +791,18 @@
     <section id="contact">
         <div class="container">
             <div class="contact-content">
-                <h2 class="section-title animate">Contact</h2>
-                <p class="animate" style="text-align: center;">Intéressé par mon profil ? Contactez-moi !</p>
-                <div class="contact-links">
-                    <a href="mailto:email@exemple.com" class="contact-link animate" style="transition-delay: 0.1s;">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="#" class="contact-link animate" style="transition-delay: 0.2s;">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="contact-link animate" style="transition-delay: 0.3s;">
-                        <i class="fab fa-linkedin"></i>
+                <h2 class="section-title">Informations</h2>
+                
+                <div class="dossier-box">
+                    <i class="fas fa-id-card"></i>
+                    <span>N° dossier Parcoursup : 266972</span>
+                </div>
+    
+                <div>
+                    <a href="https://parcoursup.fr" target="_blank" class="parcoursup-btn">
+                        <div class="logo-wrapper">
+                            <img src="parcoursup2.png" alt="Logo Parcoursup" class="parcoursup-logo">
+                        </div>
                     </a>
                 </div>
             </div>
@@ -883,25 +949,73 @@
         // Galeries des projets
         const galleries = {
             'velo-solaire': {
-                title: "Vélo Solaire Autonome",
-                description: "Projet complet de conversion d'un vélo standard en vélo électrique solaire autonome. Le système comprend :<br>- 2 panneaux solaires de 100W intégrés<br>- Batterie Li-ion 36V 10Ah<br>- Contrôleur de charge MPPT<br>- Autonomie de 50km (100km avec assistance solaire)<br>- Charge complète en 4h par soleil optimal",
+                title: "Vélo Solaire",
+                description: "Projet complet de construction d'un vélo fonctionnant à l'énergie solaire.<br> - 3 Roues<br> - 2 Panneaux solaire de 210w (100*150cm)<br> - Moteur 1500w<br> - Batterie 1 kwh",
                 images: [
                     {
-                        url: 'https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-                        description: 'Vue complète du vélo avec les panneaux solaires intégrés au cadre'
+                        url: 'image.png',
+                        description: 'Croquis du vélo'
                     },
                     {
-                        url: 'https://images.unsplash.com/photo-1602810318383-1a7702786bdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-                        description: 'Détail du système de batterie et contrôleur de charge'
+                        url: 'IMG_6313.jpg',
+                        description: 'Réalisation du chassis'
                     },
                     {
-                        url: 'https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-                        description: 'Moteur roue arrière de 250W avec capteur de pédalage'
+                        url: 'IMG_6322.jpg',
+                        description: 'Siège rembourée avec de la mousse de récup'
                     },
                     {
-                        url: 'https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-                        description: 'Schéma électronique du système de gestion de puissance'
-                    }
+                        url: 'IMG_6364.jpg',
+                        description: 'Prototypage des commandes au guidon'
+                    },
+                    {
+                        url: 'IMG_6365.jpg',
+                        description: "Réalisation d'un T hydraulique en alu pour les 2 freins avant"
+                    },
+                    {
+                        url: 'IMG_6581.jpg',
+                        description: 'Passe chaine'
+                    },
+                    {
+                        url: 'schema.jpg',
+                        description: 'Une première esquisse du schema électrique'
+                    },
+                    {
+                        url: 'IMG_6589.jpg',
+                        description: 'Mise en place de 2 U en alu de récup'
+                    },
+                    {
+                        url: 'IMG_6590.jpg',
+                        description: 'Première mise en place'
+                    },
+                    {
+                        url: 'IMG_6595.jpg',
+                        description: 'Garde boue avant'
+                    },
+                    {
+                        url: 'IMG_6597.jpg',
+                        description: 'Un peu de peinture'
+                    },
+                    {
+                        url: 'IMG_6633.jpg',
+                        description: 'Cablage'
+                    },
+                    {
+                        url: 'IMG_6638.jpg',
+                        description: 'Collage'
+                    },
+                    {
+                        url: 'IMG_6637.jpg',
+                        description: 'Batterie'
+                    },
+                    {
+                        url: 'IMG_6647.jpg',
+                        description: 'Pneu renforcée 26'
+                    },
+                    {
+                        url: 'IMG_6643.jpg',
+                        description: 'Résultat final'
+                    },
                 ]
             },
             'drone': {
@@ -924,20 +1038,13 @@
             },
             'bia': {
                 title: "Brevet Initiation Aéronautique",
-                description: "Obtention du BIA (Brevet d'Initiation Aéronautique) en 2022 avec les options :<br>- Anglais aéronautique<br>- Météorologie approfondie<br>- Histoire de l'aviation<br><br>Formation comprenant 40 heures de cours théoriques et 1 heure de vol d'initiation.",
+                description: "Obtention du BIA (Brevet d'Initiation Aéronautique) en 2022 avec option anglais aéronautique",
                 images: [
                     {
                         url: 'CamScanner 01-04-2025 16.42-1.png',
                         description: 'Diplôme du Brevet d\'Initiation Aéronautique'
                     },
-                    {
-                        url: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-                        description: 'Session de formation théorique'
-                    },
-                    {
-                        url: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-                        description: 'Vol d\'initiation en tant que copilote'
-                    }
+ 
                 ]
             }
         };
